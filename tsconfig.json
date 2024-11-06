@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "esnext", // Set a modern JavaScript version
+        "module": "NodeNext", // Keep this as is for Node.js
+        "moduleResolution": "NodeNext",
+        "baseUrl": "src",
+        "outDir": "dist",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "strict": true, // Enabling strict mode for better type safety
+        "esModuleInterop": true, // This allows default imports from modules with no default export
+        "skipLibCheck": true // Skip type checking of declaration files
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"] // Exclude node_modules to improve compilation time
+}

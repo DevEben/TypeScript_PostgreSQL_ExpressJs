@@ -1,0 +1,50 @@
+{
+  "description": "A Typescript project on NodeJs using PostgreSQL and ExpressJs",
+  "name": "typescript_postgresql_express",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "dev": "nodemon --config nodemon.json",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "typescript",
+    "postgresql"
+  ],
+  "author": "DevEben",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@prisma/client": "^5.21.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.5",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.0",
+    "@types/hapi__joi": "^17.1.15",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^1.4.12",
+    "@types/nodemailer": "^6.4.16",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "bowser": "^2.11.0",
+    "cloudinary": "^2.5.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16"
+  }
+}

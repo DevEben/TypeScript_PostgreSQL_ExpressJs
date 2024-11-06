@@ -1,0 +1,110 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String   @id @default(uuid()) @map("id")
+  username    String   @unique
+  email       String   @unique
+  password    String
+  isAdmin     Boolean  @default(false)
+  isVerified  Boolean  @default(false)
+  userPicture Picture? @relation("UserPicture")
+  pictureId   String?  @unique
+  token       String?
+  posts       Post[]
+  comments    Comment[]
+  likes       Like[]
+  shares      Share[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Picture {
+  id         String  @id @default(uuid())
+  url        String
+  public_id  String
+  user       User?   @relation("UserPicture", fields: [userId], references: [id])
+  userId     String? @unique
+
+  @@map("pictures")
+}
+
+model Post {
+  id          String       @id @default(uuid())
+  title       String
+  content     String
+  mediaFiles  MediaFile[]  @relation("PostMedia")
+  author      User         @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[]
+  likes       Like[]
+  shares      Share[]
+  shareButtons Json?
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@map("posts")
+}
+
+model MediaFile {
+  id         String   @id @default(uuid())
+  url        String
+  public_id  String
+  post       Post     @relation("PostMedia", fields: [postId], references: [id])
+  postId     String
+
+  @@map("media_files")
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  content   String
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  @@map("comments")
+}
+
+model Like {
+  id        String    @id @default(uuid())
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("likes")
+}
+
+model Share {
+  id        String    @id @default(uuid())
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("shares")
+}
+
+model Admin {
+  id        String    @id @default(uuid()) @map("id")
+  userId    String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  
+  @@map("admins")
+}
